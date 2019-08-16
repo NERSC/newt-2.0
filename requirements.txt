@@ -1,4 +1,5 @@
 Django
+django-json-404-middleware
 django-cors-middleware
 pyOpenSSL
 pymongo

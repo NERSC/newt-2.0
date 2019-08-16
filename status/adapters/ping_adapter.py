@@ -9,9 +9,8 @@ logger = logging.getLogger("newt." + __name__)
 
 
 def ping(machine_name, hostname):
-    # Do a single ping with timeout 2 seconds
-    # (output, err, retcode) = run_command('ping -c1 -t2 %s' % hostname)
-    args = shlex.split(smart_str('ping -c1 -t2 %s' % hostname))
+    # Do a single ping with timeout 10 seconds
+    args = shlex.split(smart_str('ping -c1 -t10 %s' % hostname))
     p = run(args)
     retcode = p.returncode 
     if retcode == 0:
