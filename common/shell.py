@@ -41,9 +41,20 @@ def run_command(command, env=None, timeout=600):
 def run_ssh_command(request, command, machine_name, env=None, timeout=600):
     cert_path = '/tmp'
     cert = '%s/%s.key' % (cert_path, request.user.username)
-    flags = " -q -o StrictHostKeyChecking=no -i %s -l %s" % (cert_path,
+    flags = " -q -o StrictHostKeyChecking=no -i %s -l %s" % (cert,
                                                              request.user.username)
     command = '%s %s %s %s' % (settings.SSH_CMD, flags, machine_name, command)
+    (output, error, retcode) = run_command(command)
+
+    return (output, error, retcode)
+
+
+def run_scp_command(request, src, dst, env=None, timeout=600):
+    cert_path = '/tmp'
+    cert = '%s/%s.key' % (cert_path, request.user.username)
+    flags = " -q -o StrictHostKeyChecking=no -i %s" % cert
+                                                             
+    command = '%s %s %s %s' % (settings.SCP_CMD, flags, src, dst)
     (output, error, retcode) = run_command(command)
 
     return (output, error, retcode)
